@@ -1,0 +1,90 @@
+---
+title: "Final Project"
+subtitle: "STAT 230 Spring 2025"
+author: "Rozallyn Nahomove, Najada Stroka"
+
+format:
+  html:
+    embed-resources: true
+---
+
+
+# Group members 
+
+What are your group members (up to 3 people)?
+
+ "Rozallyn Nahomove, Najada Stroka"
+
+# Data
+
+What data set are you using? 
+Emergency Department Visits Related To Mental Health Conditions - This indicator shows the rate of emergency department visits related to mental health disorders (per 100,000 population). Mental health problems can place a heavy burden on the healthcare system, particularly when persons in crisis utilize emergency departments instead of other sources of care when available. In Maryland, there were 207,650 mental health disorder-related emergency department visits in 2014.Diagnoses include adjustment disorders, anxiety disorders, attention deficit disorders, disruptive behavior disorders, mood disorders, personality disorders, schizophrenia, and other psychotic disorders, suicide and intentional self-inflicted injury and miscellaneous mental disorders.
+
+
+ENTER YOUR ANSWER HERE: DESCRIBE THE DATA (WHERE IT IS FROM? WHAT WEBSITE/API?) PROVIDE A DATA DICTIONARY WITH EACH VARIABLE IN THE DATA, THE TYPE OF VARIABLE (CATEGORICAL, CATEGORICAL ORDINAL, NUMERIC CONTINUOUS, NUMERIC DISCRETE) AND A SHORT DESCRIPTION OF EACH VARIABLE
+
+Read data in:
+
+```{r}
+library(tidyverse)
+ERvisits<-read_csv("data/SHIP_Emergency_Department_Visits_Related_To_Mental_Health_Conditions_2008-2017.csv")
+```
+
+
+# Questions
+
+What questions are you going to answer with this data set?
+
+PROVIDE AT LEAST TWO QUESTIONS -- ONE DESCRIPTIVE (FOR AT LEAST ONE NUMERIC VARIABLE) AND ONE CATEGORICAL (ADD A GROUP TO THE ANALYSIS OF YOUR CHOSEN NUMERIC VARIABLE)
+
+# Plots
+
+Distribution of one numeric variable: plot a histogram of one numeric variable
+Since 2008 has mental health worsen with the amount of ER visits? 
+Does race and enthincity have a big impact on the number of ER visits? 
+```{r}
+ERvisits|>
+  ggplot(aes(x=Value))+
+  geom_histogram()
+```
+
+Box plot of one numeric variable by one categorical variable: create a box plot of one numeric variable vs. one categorical variable
+
+
+```{r}
+ERvisits|>
+  ggplot(aes(x=Value,y=`Race/ ethnicity`))+
+  geom_boxplot()
+```
+
+
+
+
+
+
+
+Inferential Statistics 
+
+```{r}
+Model<-lm(Value~`Race/ ethnicity`,data=ERvisits)
+summary(Model)
+
+```
+
+This project analyzed emergency department visits related to mental health conditions in Maryland from 2008 to 2017. In 2014 alone, there were over 207,000 such visits, with common diagnoses including mood and anxiety disorders, as well as more severe conditions like schizophrenia and other psychotic disorders.
+
+A two-sample t-test showed that women were more likely to receive therapy than men, with the difference being statistically significant (p < 0.05). Younger individuals, especially those aged 15–24, had the highest visit rates. Seasonal trends suggested possible links to stress cycles, such as school or work.
+
+Overall, the findings point to an overreliance on emergency departments for mental health care and highlight the need for more accessible outpatient services. This analysis shows how data can help shape better mental health policies and support systems.
+
+
+
+
+
+
+
+
+
+
+
+
